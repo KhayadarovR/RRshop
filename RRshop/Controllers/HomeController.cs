@@ -41,19 +41,22 @@ namespace RRshop.Controllers
             }
             
             stopwatch.Stop(); //processes in 25+- milliseconds 
-            Console.WriteLine(nameof(HomeController.Index) + " processing time: " + stopwatch.ElapsedMilliseconds);
+            Console.WriteLine(nameof(Index) + " processing time: " + stopwatch.ElapsedMilliseconds);
             return View(viewModel);
-        }
-        
-        public IActionResult Privacy()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        
+        
+        public async Task<IActionResult> BuyProd(int id)
+        {
+            var model = await _context.Prods.Include(p => p.Category)
+                .FirstAsync(p => p.Id == id);
+            return View(model);
         }
     }
 }

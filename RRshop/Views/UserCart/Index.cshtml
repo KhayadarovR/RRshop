@@ -1,0 +1,27 @@
+﻿@model List<UserCart>;
+
+
+<div class="col-10">
+    <div class="row">
+        @* @foreach (var item in Model.DetailProds) *@
+        @* { *@
+        @*     <div class="col-md-4 pb-2"> *@
+        @*         <div class="card" style="width: 18rem; height: 32rem"> *@
+        @*             <img src="@Literals.PathForProdImg@item.Prod.ImgPath" class="card-img-top" alt="..."> *@
+        @*             <div class="card-body"> *@
+        @*                 <h5 class="card-title">@item.Prod.Title</h5> *@
+        @*                 <h5 class="card-title">@item.Prod.Price руб.</h5> *@
+        @*                 <h6 class="card-subtitle mb-2 text-muted">@item.Prod.Category.Title</h6> *@
+        @*                 <h6 class="card-subtitle mb-2">Цвет: @item.Prod.Color</h6> *@
+        @*                 @for (int i = 0; i < item.SizeList.Count; i++) *@
+        @*                 { *@
+        @*                     <span class="text-light bg-dark badge badge-pill">@item.SizeList[i]</span> *@
+        @*                 } *@
+        @*                 <br/> *@
+        @*                 <a asp-action="BuyProd" asp-route-id="@item.Prod.Id" class="btn my-1 btn-danger"> Заказать </a> *@
+        @*             </div> *@
+        @*         </div> *@
+        @*     </div> *@
+        @* } *@
+    </div>
+</div>

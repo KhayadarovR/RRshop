@@ -1,0 +1,56 @@
+﻿@using RRshop.Data
+@model Prod
+
+@{
+    ViewBag.Title = "Заказать товар";
+}
+
+<h2>Заказать</h2>
+
+<div class="col-10">
+        <div class="row">
+                <div class="col-md-4 pb-2">
+                    <div class="card" style="width: 18rem; height: 32rem">
+                        <img src="@Literals.PathForProdImg@Model.ImgPath" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">@Model.Title</h5>
+                            <h5 class="card-title">@Model.Price руб.</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@Model.Category.Title</h6>
+                            <h6 class="card-subtitle mb-2">Цвет: @Model.Color</h6>
+                            <br/>
+                            <button class="counter-minus btn btn-success">-</button>
+                            <a asp-action="BuyProd" asp-route-id="@Model.Id" class="btn my-1 btn btn-warning">
+                                
+                                Купить <span class="counter-display badge badge-light">1</span>
+                            </a>
+                            <button class="counter-plus btn btn-danger">+</button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+<script>
+let counterDisplayElem = document.querySelector('.counter-display');
+let counterMinusElem = document.querySelector('.counter-minus');
+let counterPlusElem = document.querySelector('.counter-plus');
+
+let count = 1;
+
+updateDisplay();
+
+counterPlusElem.addEventListener("click",()=>{
+    if (count < 10)
+        count++;
+    updateDisplay();
+}) ;
+
+counterMinusElem.addEventListener("click",()=>{
+    if (count > 1)
+        count--;
+    updateDisplay();
+});
+
+function updateDisplay(){
+    counterDisplayElem.innerHTML = count;
+};
+</script>

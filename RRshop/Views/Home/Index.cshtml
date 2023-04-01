@@ -1,30 +1,44 @@
 ﻿@using RRshop.ViewModels
+@using RRshop.Data
 @model RRshop.ViewModels.HomeViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
 
 
-<div class="row">
-    <div class="col-4">
-        @foreach (var item in Model.Categories)
-        {
-            <a>@item.Title</a>
-        }
-    </div>
-    <div class="col-8">
-        @foreach (var item in Model.DetailProds)
-        {
-            <p>@item.Prod.Title</p>
-            <p>@item.Prod.Price</p>
-            <p>@item.Prod.Category.Title</p>
-                                        
-            @for (int i = 0; i < item.SizeList.Count; i++)
+<div class="row bg-light">
+    <div class="col-2">
+        <ul class="list-group">
+            @foreach (var item in Model.Categories)
             {
-                <span class="text-light bg-dark badge badge-pill">@item.SizeList[i]</span>
+                <li class="list-group-item list-group-item-danger"><a class="nav-link text-black fs-6" href="#">@item.Title</a></li>
             }
-            <hr/>
-        }
+        </ul>
+    </div>
+    <div class="col-10">
+        <div class="row">
+            @foreach (var item in Model.DetailProds)
+            {
+                <div class="col-md-4 pb-2">
+                    <div class="card" style="width: 18rem; height: 32rem">
+                        <img src="@Literals.PathForProdImg@item.Prod.ImgPath" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Prod.Title</h5>
+                            <h5 class="card-title">@item.Prod.Price руб.</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@item.Prod.Category.Title</h6>
+                            <h6 class="card-subtitle mb-2">Цвет: @item.Prod.Color</h6>
+                            @for (int i = 0; i < item.SizeList.Count; i++)
+                            {
+                                <span class="text-light bg-dark badge badge-pill">@item.SizeList[i]</span>
+                            }
+                            <br/>
+                            <a asp-action="BuyProd" asp-route-id="@item.Prod.Id" class="btn my-1 btn-danger"> Заказать </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 </div>
+
 

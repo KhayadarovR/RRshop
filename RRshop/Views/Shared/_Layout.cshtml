@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/RRshop.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="bg-light">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -35,17 +35,17 @@
 
                         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
                             <ul class="navbar-nav d-sm-inline-flex justify-content-end">
-                                @if (User.IsInRole(Roles.SUser))
+                                @if (User.IsInRole(Roles.SUser) || User.IsInRole(Roles.Root) || User.IsInRole(Roles.Root))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-success bg-light border-1" asp-area="" asp-controller="Account" asp-action="Register">Корзина</a>
+                                        <a class="nav-link text-white bg-dark" asp-area="" asp-controller="UserCart" asp-action="Index">Корзина</a>
                                     </li>
                                 }
                                 <li class="nav-item">
-                                    <a class="nav-link text-success bg-light border-1" asp-area="" asp-controller="Account" asp-action="Index">Аккаунт</a>
+                                    <a class="nav-link text-success text-white bg-dark" asp-area="" asp-controller="Account" asp-action="Index">Аккаунт</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-success bg-light border-1" asp-area="" asp-controller="Account" asp-action="Register">Регистрация</a>
+                                    <a class="nav-link text-success text-white bg-dark" asp-area="" asp-controller="Account" asp-action="Register">Регистрация</a>
                                 </li>
                             </ul>
                         </div>
@@ -62,7 +62,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - RRshop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - RRshop - <a href="#">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
