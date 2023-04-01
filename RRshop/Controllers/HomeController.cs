@@ -17,18 +17,20 @@ namespace RRshop.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            Stopwatch stopwatch = Stopwatch.StartNew();
+
             HomeViewModel viewModel = new HomeViewModel();
 
-            viewModel.Categories = _context.Categories.ToList();
-            var allProds = _context.Prods.Include(p => p.Category).ToList();
+            viewModel.Categories = await _context.Categories.ToListAsync();
+            var allProds = await _context.Prods.Include(p => p.Category).ToListAsync();
             
             
             for (int i = 0; i < allProds.Count; i++)
             {
                 List<float> sizeValueList = new();
-                List<Size> sizeList = _context.Sizes.Where(s => s.ProdId == allProds[i].Id).ToList();
+                List<Size> sizeList = await _context.Sizes.Where(s => s.ProdId == allProds[i].Id).ToListAsync();
                 sizeList.ForEach(s => sizeValueList.Add(s.Size1));
                 
                 viewModel.DetailProds.Add(new DetailProdViewModel()
@@ -38,6 +40,8 @@ namespace RRshop.Controllers
                 });
             }
             
+            stopwatch.Stop(); //processes in 25+- milliseconds 
+            Console.WriteLine(nameof(HomeController.Index) + " processing time: " + stopwatch.ElapsedMilliseconds);
             return View(viewModel);
         }
         
