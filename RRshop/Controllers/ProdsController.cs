@@ -32,21 +32,19 @@ public class ProdsController : Controller
     // GET: Prods/Details/5
     public async Task<IActionResult> Details(int? id)
     {
-        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
-        if (id == null || _context.Prods == null)
-        {
-            return NotFound();
-        }
+        if (id == null) return NotFound(); 
 
         var prod = await _context.Prods
             .Include(p => p.Category)
             .FirstOrDefaultAsync(m => m.Id == id);
-        if (prod == null)
-        {
-            return NotFound();
-        }
+        
+        if (prod == null) return NotFound();
 
-        return View(prod);
+        List<float> sizeValueList = new();
+        List<Size> sizeList = _context.Sizes.Where(s => s.ProdId == prod.Id).ToList();
+        sizeList.ForEach(s => sizeValueList.Add(s.Size1));
+        
+        return View(new DetailProdViewModel() {Prod = prod, SizeList = sizeValueList});
     }
 
     // GET: Prods/Create
