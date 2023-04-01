@@ -1,8 +1,30 @@
-﻿@{
+﻿@using RRshop.ViewModels
+@model RRshop.ViewModels.HomeViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="row">
+    <div class="col-4">
+        @foreach (var item in Model.Categories)
+        {
+            <a>@item.Title</a>
+        }
+    </div>
+    <div class="col-8">
+        @foreach (var item in Model.DetailProds)
+        {
+            <p>@item.Prod.Title</p>
+            <p>@item.Prod.Price</p>
+            <p>@item.Prod.Category.Title</p>
+                                        
+            @for (int i = 0; i < item.SizeList.Count; i++)
+            {
+                <span class="text-light bg-dark badge badge-pill">@item.SizeList[i]</span>
+            }
+            <hr/>
+        }
+    </div>
 </div>
+

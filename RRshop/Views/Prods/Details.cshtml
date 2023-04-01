@@ -9,57 +9,59 @@
 <h1>Details</h1>
 
 <div class="container">
+    <div class="row">
     <h4>Prod</h4>
-    <hr />
+    <hr/>
     <div class="col">
         <img src="@Literals.PathForProdImg@Model.Prod.ImgPath" class="img-thumbnail" alt="..." style="width: 400px">
     </div>
     <div class="col">
-    <dl class="">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Prod.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Prod.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Prod.Price)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Prod.Price)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Prod.Color)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Prod.Color)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Prod.SaleQuantity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Prod.SaleQuantity)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Prod.ImgPath)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Prod.ImgPath)
-        </dd>
-        <dt class = "col-sm-2">
-            Категория: @Html.DisplayFor(model => model.Prod.Category.Title)
-        </dt>
-    </dl>
-    <div class="col-sm-12">
-        Размеры: 
-        @for (int i = 0; i < Model.SizeList.Count; i++)
-        {
-            <span class="text-light bg-dark badge badge-pill">@Model.SizeList[i]</span>
-        }
-    </div>
+        <dl class="">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Prod.Title)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Prod.Title)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Prod.Price)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Prod.Price)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Prod.Color)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Prod.Color)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Prod.SaleQuantity)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Prod.SaleQuantity)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Prod.ImgPath)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Prod.ImgPath)
+            </dd>
+            <dt class="col-sm-2">
+                Категория: @Html.DisplayFor(model => model.Prod.Category.Title)
+            </dt>
+        </dl>
+        <div class="col-sm-12">
+            Размеры:
+            @for (int i = 0; i < Model.SizeList.Count; i++)
+            {
+                <span class="text-light bg-dark badge badge-pill">@Model.SizeList[i]</span>
+            }
+        </div>
         <div class="mt-4">
             <a asp-action="Edit" asp-route-id="@Model.Prod.Id">Edit</a> |
             <a asp-action="Index">Back to List</a>
         </div>
-        </div>
+    </div>
+    </div>
 </div>
