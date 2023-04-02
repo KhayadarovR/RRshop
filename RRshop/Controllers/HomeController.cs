@@ -25,8 +25,8 @@ namespace RRshop.Controllers
 
             viewModel.Categories = await _context.Categories.ToListAsync();
             var allProds = await _context.Prods.Include(p => p.Category).ToListAsync();
-            
-            
+
+
             for (int i = 0; i < allProds.Count; i++)
             {
                 List<float> sizeValueList = new();
@@ -44,7 +44,33 @@ namespace RRshop.Controllers
             Console.WriteLine(nameof(Index) + " processing time: " + stopwatch.ElapsedMilliseconds);
             return View(viewModel);
         }
+        
+        
+        public async Task<IActionResult> IndexFilter(string category)
+        {
+            HomeViewModel viewModel = new HomeViewModel();
 
+            viewModel.Categories = await _context.Categories.ToListAsync();
+            var allProds = await _context.Prods.Include(p => p.Category)
+                .Where(p => p.Category.Title == category).ToListAsync();
+
+
+            for (int i = 0; i < allProds.Count; i++)
+            {
+                List<float> sizeValueList = new();
+                List<Size> sizeList = await _context.Sizes.Where(s => s.ProdId == allProds[i].Id).ToListAsync();
+                sizeList.ForEach(s => sizeValueList.Add(s.Size1));
+                
+                viewModel.DetailProds.Add(new DetailProdViewModel()
+                {
+                    Prod = allProds[i],
+                    SizeList = sizeValueList
+                });
+            }
+
+            return View("Index", viewModel);
+        }
+        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -56,7 +82,36 @@ namespace RRshop.Controllers
         {
             var model = await _context.Prods.Include(p => p.Category)
                 .FirstAsync(p => p.Id == id);
-            return View(model);
+            
+            return View(new BuyProdViewModel()
+            {
+                Count = 1,
+                Prod = model
+            });
+        }
+        
+        
+        [HttpPost]
+        public IActionResult UserCartAdd(int prodId, int count)
+        {
+            if (count <= 0) return RedirectToAction("Index");
+            try
+            {
+                int userId = int.Parse(s: HttpContext.User.FindFirst("id").Value);
+
+                for (int i = 0; i < count; i++)
+                {
+                    _context.Database.ExecuteSqlInterpolated($"INSERT INTO user_cart VALUES({userId}, {prodId})");
+                }
+
+                return RedirectToAction("Index", "UserCart");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                ModelState.AddModelError("", e.Message);
+                return Redirect(nameof(Index));
+            }
         }
     }
 }

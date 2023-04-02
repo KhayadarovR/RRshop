@@ -1,4 +1,5 @@
-﻿@model IEnumerable<RRshop.Models.User>
+﻿@using RRshop.Data
+@model IEnumerable<RRshop.Models.User>
 
 @{
     ViewData["Title"] = "Index";
@@ -36,6 +37,10 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
+    @if (item.Role == Roles.Root)
+    {
+        continue;
+    }
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)

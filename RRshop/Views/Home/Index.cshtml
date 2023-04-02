@@ -9,9 +9,14 @@
 <div class="row bg-light">
     <div class="col-2">
         <ul class="list-group">
+             <li class="list-group-item list-group-item-success">
+                 <a class="nav-link text-black fs-6" asp-action="Index">Все товары</a>
+             </li>
             @foreach (var item in Model.Categories)
             {
-                <li class="list-group-item list-group-item-danger"><a class="nav-link text-black fs-6" href="#">@item.Title</a></li>
+                <li class="list-group-item list-group-item-danger">
+                    <a class="nav-link text-black fs-6" asp-action="IndexFilter" asp-route-category="@item.Title">@item.Title</a>
+                </li>
             }
         </ul>
     </div>
