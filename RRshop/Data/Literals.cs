@@ -2,7 +2,7 @@
 
 public static class Literals
 {
-    public const string PathForProdImg = "/img/prod/";
+    public static string PathForProdImg = Path.Combine("/img", "/prod");
 
     public const string DefaultProdImgName = "default.png";
 }
