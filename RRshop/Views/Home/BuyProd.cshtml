@@ -19,7 +19,20 @@
                             <h6 class="card-subtitle mb-2">Цвет: @Model.Prod.Color</h6>
                             <br/>
                             <form asp-action="UserCartAdd">
-                                <input type="number" asp-for="@Model.Count" class="input-group-lg fs-5">
+                                @*<input type="number" asp-for="@Model.Count" class="input-group-lg fs-5">*@
+                        @{
+                                        var selectList = new SelectList(
+                                        new List<SelectListItem>
+                        {
+                                    new SelectListItem {Text = "1", Value = "1" },
+                                    new SelectListItem {Text = "2", Value = "2" },
+                                    new SelectListItem {Text = "3", Value = "3" },
+                                    new SelectListItem {Text = "4", Value = "4" },
+                                    new SelectListItem {Text = "5", Value = "5" }
+                        }, "Value", "Text");
+                                    }
+                                @Html.DropDownListFor(m => m.Count, selectList, new { @class = "form-control" })
+
                                 <button asp-action="UserCartAdd" asp-route-count="@Model.Count" asp-route-prodId="@Model.Prod.Id" class="btn my-1 btn btn-warning fs-3">
                                     Купить
                                 </button>
