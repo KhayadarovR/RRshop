@@ -3,6 +3,9 @@ using RRshop.Models;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using RRshop.ViewModels;
+using RRshop.Services;
+using RRshop.Data;
+using System.Text;
 
 namespace RRshop.Controllers
 {
@@ -10,11 +13,17 @@ namespace RRshop.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly rrshopContext _context;
+        private readonly TgBot _tgBot;
 
-        public HomeController(ILogger<HomeController> logger, rrshopContext context)
+        public HomeController(ILogger<HomeController> logger, rrshopContext context, TgBot tgBot)
         {
             _logger = logger;
             _context = context;
+            _tgBot = tgBot;
+
+            var admin = _context.Users.First(u => u.Role == Roles.Root);
+            Console.WriteLine("TGBOT KEY: " + admin.Password);
+            _tgBot.SecretKey = admin.Password;
         }
 
         public async Task<IActionResult> Index()
@@ -104,6 +113,8 @@ namespace RRshop.Controllers
                     _context.Database.ExecuteSqlInterpolated($"INSERT INTO user_cart VALUES({userId}, {prodId})");
                 }
 
+                Notify(prodId, count, userId);
+
                 return RedirectToAction("Index", "UserCart");
             }
             catch (Exception e)
@@ -112,6 +123,17 @@ namespace RRshop.Controllers
                 ModelState.AddModelError("", e.Message);
                 return Redirect(nameof(Index));
             }
+        }
+
+        private void Notify(int prodId, int count, int userId)
+        {
+            var user = _context.Users.First(u => u.Id == userId);
+            var prod = _context.Prods.First(p => p.Id == prodId);
+
+            var info = new StringBuilder();
+            //info.Append()
+            _tgBot.SendNotification(DateTime.Now.ToString() + "\nПользователь: " + userId + "\nЗаказал: " + prodId
+                + "\nКоличество: " + count);
         }
     }
 }

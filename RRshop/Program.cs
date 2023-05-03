@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using RRshop.DTO;
 using RRshop.Models;
+using RRshop.Services;
 
 System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
 
@@ -20,6 +21,8 @@ builder.Services.AddDbContext<rrshopContext>(options =>
 options.UseMySql(builder.Configuration.GetConnectionString("MySql"), ServerVersion.Parse("8.0.32-mysql")));
 
 builder.Services.AddAutoMapper(typeof(UserMapping));
+
+builder.Services.AddSingleton<TgBot>();
 
 var app = builder.Build();
 
