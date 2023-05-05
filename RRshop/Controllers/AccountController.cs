@@ -8,6 +8,8 @@ using RRshop.Data;
 using RRshop.Models;
 using RRshop.ViewModels;
 using System.Security.Claims;
+using System.Text;
+using RRshop.Services;
 
 namespace RRshop.Controllers
 {
@@ -34,6 +36,12 @@ namespace RRshop.Controllers
                 return NotFound();
             }
 
+            if (model.Role == Roles.Root)
+            {
+                var tgbot = HttpContext.RequestServices.GetService<INotifyService>();
+                tgbot.SecretKey = GetRandomString();
+                ViewBag.bot_key = tgbot.SecretKey;
+            }
             return View(model);
         }
 
@@ -126,6 +134,19 @@ namespace RRshop.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
+        }
+        
+        private string GetRandomString()
+        {
+            var code = new char[4];
+            Random r = new Random();
+            var result = new StringBuilder();
+            for (int i = 0; i < 4; i++)
+            {
+                result.Append((char) r.NextInt64(97, 122));
+            }
+            
+            return result.ToString();
         }
     }
 }

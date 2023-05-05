@@ -22,7 +22,7 @@ options.UseMySql(builder.Configuration.GetConnectionString("MySql"), ServerVersi
 
 builder.Services.AddAutoMapper(typeof(UserMapping));
 
-builder.Services.AddSingleton<TgBot>();
+builder.Services.AddSingleton<INotifyService,TgBot>();
 
 var app = builder.Build();
 

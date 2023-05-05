@@ -41,6 +41,10 @@
                     <li class="list-group-item">Дата регистрации: @Model.CreateTime</li>
                     <li class="list-group-item">Город: @Model.City</li>
                     <li class="list-group-item">Роль: @Model.Role</li>
+                    @if (User.IsInRole(Roles.Root))
+                    {
+                        <li class="list-group-item">Ключ регистрации в боте: @ViewBag.bot_key</li>
+                    }
                 </ul>
             </div>
             <a class="btn btn-danger" asp-controller="Account" asp-action="Logout">Выйти</a>

@@ -13,18 +13,15 @@ namespace RRshop.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly rrshopContext _context;
-        private readonly TgBot _tgBot;
+        private readonly INotifyService _notifyService;
 
-        public HomeController(ILogger<HomeController> logger, rrshopContext context, TgBot tgBot)
+        public HomeController(ILogger<HomeController> logger, rrshopContext context, INotifyService notifyService)
         {
             _logger = logger;
             _context = context;
-            _tgBot = tgBot;
-
-            var admin = _context.Users.First(u => u.Role == Roles.Root);
-            Console.WriteLine("TGBOT KEY: " + admin.Password);
-            _tgBot.SecretKey = admin.Password;
+            _notifyService = notifyService;
         }
+
 
         public async Task<IActionResult> Index()
         {
@@ -127,13 +124,17 @@ namespace RRshop.Controllers
 
         private void Notify(int prodId, int count, int userId)
         {
-            var user = _context.Users.First(u => u.Id == userId);
-            var prod = _context.Prods.First(p => p.Id == prodId);
-
             var info = new StringBuilder();
-            //info.Append()
-            _tgBot.SendNotification(DateTime.Now.ToString() + "\nПользователь: " + userId + "\nЗаказал: " + prodId
-                + "\nКоличество: " + count);
+            var user = _context.Users.First(u => u.Id == userId);
+            var prod = _context.Prods.
+                Include(p => p.Category).
+                First(p => p.Id == prodId);
+            info.Append($"ПОКУПАТЕЛЬ \n{user.Name} ({user.Id})\nНомер: {user.Phone}\nМестопложение: {user.City}");
+            info.Append($"\n\nТОВАР \n{prod.Title} ({prod.Id}) \nКатегория: {prod.Category.Title}" +
+                           $"\nЦвет: {prod.Color}\nКоличество: {count}\nЦена: {prod.Price} руб." +
+                           $"\nИТОГО: {prod.Price*count} рублей");
+            
+            _notifyService.Notify(info.ToString());
         }
     }
 }
