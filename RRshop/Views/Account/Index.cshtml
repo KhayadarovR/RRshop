@@ -7,31 +7,35 @@
 
 
 <div class="container text-center">
-    <div class="row align-items-end">
+    <div class="row align-items-start">
         @if (User.IsInRole(Roles.Root) || User.IsInRole(Roles.Admin))
         {
-            <div class="col d-grid gap-2">
+            <div class="col d-grid gap-2 align-content-start">
                 <ul class="navbar-nav flex-grow-1 btn-group my-3">
                     <h2 class="text-md-center">Панель управления</h2>
                     <li class="nav-item my-1">
-                        <a class="btn btn-danger text-dark" asp-area="" asp-controller="Home" asp-action="Index">Магазин</a>
+                        <a style="width: 300px"
+                           class="btn btn-dark text-light" asp-area="" asp-controller="Home" asp-action="Index">Магазин</a>
                     </li>
                     <li class="nav-item my-1">
-                        <a class="btn btn-danger" asp-area="" asp-controller="Categories" asp-action="Index">Категории</a>
+                        <a style="width: 300px" 
+                           class="btn btn-dark" asp-area="" asp-controller="Categories" asp-action="Index">Категории</a>
                     </li>
                     <li class="nav-item my-1">
-                        <a class="btn btn-danger" asp-area="" asp-controller="Prods" asp-action="Index">Товары</a>
+                        <a style="width: 300px"
+                            class="btn btn-dark" asp-area="" asp-controller="Prods" asp-action="Index">Товары</a>
                     </li>
                     <li class="nav-item my-1">
-                        <a class="btn btn-warning" asp-area="" asp-controller="Users" asp-action="Index">!Пользователи!</a>
+                        <a style="width: 300px"
+                            class="btn btn-warning" asp-area="" asp-controller="Users" asp-action="Index">!Пользователи!</a>
                     </li>
                 </ul>
             </div>
         }
         
         <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img src="data:image/png;base64,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" class="card-img-top" alt="">
+            <div class="card" style="width: 400px">
+                <img src="https://cdn-icons-png.flaticon.com/512/3106/3106773.png" class="card-img-top" alt="">
                 <div class="card-body">
                     <h6 class="card-title">@Model.Id</h6>
                     <h5 class="card-title">@Model.Name</h5>
@@ -45,9 +49,10 @@
                     {
                         <li class="list-group-item">Ключ регистрации в боте: @ViewBag.bot_key</li>
                     }
+                    <a class="btn btn-danger" asp-controller="Account" asp-action="Logout">Выйти</a>
                 </ul>
             </div>
-            <a class="btn btn-danger" asp-controller="Account" asp-action="Logout">Выйти</a>
+            
         </div>
 
     </div>

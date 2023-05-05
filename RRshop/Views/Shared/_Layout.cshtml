@@ -21,7 +21,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Магазин</a>
+                            <a class="nav-link text-white btn-dark btn-lg mx-2 px-lg-5k" asp-area="" asp-controller="Home" asp-action="Index">Магазин</a>
                         </li>
 
                         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
@@ -29,14 +29,14 @@
                                 @if (User.IsInRole(Roles.SUser) || User.IsInRole(Roles.Root) || User.IsInRole(Roles.Root))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-white bg-dark" asp-area="" asp-controller="UserCart" asp-action="Index">Корзина</a>
+                                        <a class="nav-link text-white btn-dark btn-lg mx-2 px-lg-5" asp-area="" asp-controller="UserCart" asp-action="Index">Корзина</a>
                                     </li>
                                 }
                                 <li class="nav-item">
-                                    <a class="nav-link text-success text-white bg-dark" asp-area="" asp-controller="Account" asp-action="Index">Аккаунт</a>
+                                    <a class="nav-link text-white btn-dark btn-lg mx-2 px-lg-5" asp-area="" asp-controller="Account" asp-action="Index">Аккаунт</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-success text-white bg-dark" asp-area="" asp-controller="Account" asp-action="Register">Регистрация</a>
+                                    <a class="nav-link text-white btn-dark btn-lg mx-2 px-lg-5" asp-area="" asp-controller="Account" asp-action="Register">Регистрация</a>
                                 </li>
                             </ul>
                         </div>
@@ -57,8 +57,8 @@
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
