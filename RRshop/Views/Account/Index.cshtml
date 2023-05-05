@@ -7,58 +7,58 @@
 
 
 <div class="container text-center">
-    <div class="row align-items-start">
-        @if (User.IsInRole(Roles.Root) || User.IsInRole(Roles.Admin))
-        {
-            <div class="col d-grid gap-2 align-content-start">
-                <ul class="navbar-nav flex-grow-1 btn-group my-3">
-                    <h2 class="text-md-center">Панель управления</h2>
-                    <i class="bi bi-bag-check-fill"></i>
-                    <li class="nav-item my-1">
-                        <a style="width: 300px"
-                           class="btn btn-dark text-light" asp-area="" asp-controller="Home" asp-action="Index">Магазин</a>
-                    </li>
-                    <i class="bi bi-bookmark-dash-fill"></i>
-                    <li class="nav-item my-1">
-                        <a style="width: 300px" 
-                           class="btn btn-dark" asp-area="" asp-controller="Categories" asp-action="Index">Категории</a>
-                    </li>
-                    <i class="bi bi-emoji-smile-fill"></i>
-                    <li class="nav-item my-1">
-                        <a style="width: 300px"
-                           class="btn btn-dark" asp-area="" asp-controller="Prods" asp-action="Index">Товары</a>
-                    </li>
-                    <i class="bi bi-people-fill"></i>
-                    <li class="nav-item my-1">
-                        <a style="width: 300px"
-                           class="btn btn-warning" asp-area="" asp-controller="Users" asp-action="Index">!Пользователи!</a>
-                    </li>
-                </ul>
-            </div>
-        }
-        
-        <div class="col">
-            <div class="card" style="width: 400px">
-                <img src="https://cdn-icons-png.flaticon.com/512/3106/3106773.png" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h6 class="card-title">@Model.Id</h6>
-                    <h5 class="card-title">@Model.Name</h5>
-                    <p class="card-text">@Model.Phone</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Дата регистрации: @Model.CreateTime</li>
-                    <li class="list-group-item">Город: @Model.City</li>
-                    <li class="list-group-item">Роль: @Model.Role</li>
-                    @if (User.IsInRole(Roles.Root))
-                    {
-                        <li class="list-group-item">Ключ регистрации в боте: @ViewBag.bot_key</li>
-                    }
-                    <a class="btn btn-danger" asp-controller="Account" asp-action="Logout">Выйти</a>
-                </ul>
-            </div>
+    <div class="">
+        <div class="row align-items-start">
+                @if (User.IsInRole(Roles.Root) || User.IsInRole(Roles.Admin))
+                {
+                    <div class="col d-grid gap-2 align-content-start">
+                        <ul class="navbar-nav flex-grow-1 btn-group my-3">
+                            <h2 class="text-md-center">Панель управления</h2>
+                            <i class="bi bi-bag-check-fill"></i>
+                            <li class="nav-item my-1">
+                                <a style="width: 300px"
+                                   class="btn btn-dark text-light" asp-area="" asp-controller="Home" asp-action="Index">Магазин</a>
+                            </li>
+                            <i class="bi bi-bookmark-dash-fill"></i>
+                            <li class="nav-item my-1">
+                                <a style="width: 300px"
+                                   class="btn btn-dark" asp-area="" asp-controller="Categories" asp-action="Index">Категории</a>
+                            </li>
+                            <i class="bi bi-emoji-smile-fill"></i>
+                            <li class="nav-item my-1">
+                                <a style="width: 300px"
+                                   class="btn btn-dark" asp-area="" asp-controller="Prods" asp-action="Index">Товары</a>
+                            </li>
+                            <i class="bi bi-people-fill"></i>
+                            <li class="nav-item my-1">
+                                <a style="width: 300px"
+                                   class="btn btn-warning" asp-area="" asp-controller="Users" asp-action="Index">!Пользователи!</a>
+                            </li>
+                        </ul>
+                    </div>
+                }
             
+                <div class="col row justify-content-start">
+                    <div class="card" style="width: 400px">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3106/3106773.png" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h6 class="card-title">@Model.Id</h6>
+                            <h5 class="card-title">@Model.Name</h5>
+                            <p class="card-text">@Model.Phone</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Дата регистрации: @Model.CreateTime</li>
+                            <li class="list-group-item">Город: @Model.City</li>
+                            <li class="list-group-item">Роль: @Model.Role</li>
+                            @if (User.IsInRole(Roles.Root))
+                            {
+                                <li class="list-group-item">Ключ регистрации в боте: @ViewBag.bot_key</li>
+                            }
+                            <a class="btn btn-danger" asp-controller="Account" asp-action="Logout">Выйти</a>
+                        </ul>
+                    </div>
+                </div>
         </div>
-
     </div>
 </div>
 
