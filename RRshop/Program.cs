@@ -1,11 +1,14 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using RRshop.DTO;
 using RRshop.Models;
 using RRshop.Services;
 
 System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+
+Console.WriteLine("Start 0");
 
 var builder = WebApplication.CreateBuilder(args);
 

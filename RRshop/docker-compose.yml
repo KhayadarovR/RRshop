@@ -1,0 +1,27 @@
+version: '3.2'
+
+services:
+  db:
+    image: mysql:8.0.32
+    container_name: db
+    build:
+      context: .
+      dockerfile: MySqlDocker\Dockerfile
+    ports:
+      - "49301:3306"
+    environment:
+      MYSQL_DATABASE: rrshop
+      MYSQL_ROOT_PASSWORD: dbuserpassword
+    volumes:
+      - dbdata:/var/lib/mysql
+  app:
+    image: rrs/rrs:0.5
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "49501:80"
+        
+volumes:
+  dbdata:
